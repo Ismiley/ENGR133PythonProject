@@ -1,4 +1,4 @@
-To get files from repository:
+To get files from repository **FIRST TIME:
 git clone (enter repository link)
 
 To upload files from local repository:
@@ -6,3 +6,8 @@ cd (project location on local device)
 git add (filename to be added back to online repository)
 git commit -m "(message for revision)"
 git push
+
+
+To get update files from online repository
+cd (local project address)
+git pull
