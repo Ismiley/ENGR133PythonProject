@@ -1,4 +1,3 @@
-
 '''
 ===============================================================================
 ENGR 133 Fa 2020
@@ -23,8 +22,6 @@ Contributors:   Ismail Husain, husain6@purdue
 ===============================================================================
 '''
 import matplotlib.image as mpl
-import numpy as num
-import sys as s
 
 class Error1(FileNotFoundError):
     pass
@@ -36,31 +33,31 @@ except FileNotFoundError:
 
 # Takes a file path and returns the array of the image
 def importImage(x): #x is the file path as a string
-    global image # to show image in variable explorer for analysis
+    global image # to show image in variable explorer for analysis and later use
     image = mpl.imread(x)
-    image=image #here for debug sake
     return image
 
+#Takes he image and and makes it gray by changing the color values of each pixel.
 def RGBtoGRAY(rgb):
-    global gray
+    global gray # to show image in cariable explorer for analysis
     for i in range(len(rgb)):
         for j in range(len(rgb[0])):
+            # Gets the RGB values for a pixel
             r=rgb[i][j][0]
             g=rgb[i][j][1]
-            b=rgb[i][j][2]           
+            b=rgb[i][j][2]
+            # Calculates new color value grayscaled
             gray=(0.2989*r+0.5870*g+0.1140*b)
+            # Assignes new gray value to old RGB values
             rgb[i][j][0],rgb[i][j][1],rgb[i][j][2]=gray,gray,gray
     return rgb
 
+# Opens an output file, runs applicable functions, then closes
 GOutput=open('Grayscale.png','wb')
 importImage(Input)
 RGBtoGRAY(image)
-
 mpl.imsave('Grayscale.png',RGBtoGRAY(image))
-
 GOutput.close
-
-
 
 '''
 ===============================================================================
@@ -71,4 +68,3 @@ ACADEMIC INTEGRITY STATEMENT
     is my own original work.
 ===============================================================================
 '''
-
