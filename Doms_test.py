@@ -58,28 +58,6 @@ RGBtoGRAY(image)
 
 mpl.imsave('Grayscale.png',RGBtoGRAY(image))
 
-
-
-
-#g=0
-#for i in Input:
-#    importImage(Input)
-#    RGBtoGRAY(image)
-#    GOutput.write(gray)
-#    g=g+1.1
-#    if g%11==0:
-#        print(g)
-#    else:
-#        pass
-    
-    
-    
-    
-#    print(importImage)
-#    s.exit()
-
-
-
 GOutput.close
 
 
