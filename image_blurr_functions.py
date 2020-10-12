@@ -28,8 +28,10 @@ Contributors:   Matthew Kane, kane83@purdue.edu
 #All commented print statements are for debug purposes only
 
 import matplotlib.image as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 import math as m
+import time
 
 def getInputs():                                                               #Function for obtaining input values from the user                                                       
     try:                                                                       #Error handling for incorrect entries for a sigma value
@@ -120,30 +122,30 @@ def calcBlur(kernelRows,kernelCols,gaussKernel,kernel):                        #
     return blurVal
   
 def construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel,numPixels):
-    print("Processing image...")                            #Begin iterative process 
+    print("Processing image...") 
     currentPixel = 0
-    currentCol = 0                                                                 #Variable to store where cursor is relative to the window
+    currentCol = 0                                                             #Variable to store where cursor is relative to the window
     currentRow = 0                                                                 
-    rowInImage = m.floor(kernelRows/2)                                             #variable to store where the cursor is relative to the image
+    rowInImage = m.floor(kernelRows/2)                                         #variable to store where the cursor is relative to the image
     colInImage = m.floor(kernelCols/2)                                             
-    rowBlur = 0                                                                    #Variable to store the cursor relative to the blurred image
+    rowBlur = 0                                                                #Variable to store the cursor relative to the blurred image
     colBlur = 0                                                                    
-    while rowInImage < numRows and colInImage < numCols:                           #Iterate through the rows and columns of the image, making each pixel the center pixel of the working window
+    while rowInImage < numRows and colInImage < numCols:                       #Iterate through the rows and columns of the image, making each pixel the center pixel of the working window
         kernel = calcWindow(kernelRows,kernelCols,grayscaleVals,currentCol,currentRow,colInImage)
-        if colInImage == (numCols-1):                                              #Handle the case when the counter reaches the end of a row
+        if colInImage == (numCols-1):                                          #Handle the case when the counter reaches the end of a row
             rowInImage += 1                                                        
             colInImage = (m.floor(kernelCols/2)-1)                                 
         colInImage += 1                                                                                                                   
-        currentCol = colInImage - m.floor(kernelCols/2)                            #calculate the row/column that the window starts filling from 
+        currentCol = colInImage - m.floor(kernelCols/2)                        #calculate the row/column that the window starts filling from 
         currentRow = rowInImage - m.floor(kernelRows/2)                            
         #print(f"The new window will be centered on pixel at row {rowInImage} and column {colInImage} and will start from row {currentRow} and start from column {currentCol}")
         #pauseBuffer = input("Pausing... Press Enter to Continue")
     
-        blurVal = calcBlur(kernelRows,kernelCols,gaussKernel,kernel)               #Construct the blur Value 
+        blurVal = calcBlur(kernelRows,kernelCols,gaussKernel,kernel)           #Construct the blur Value 
 
-        blurredImage[rowBlur][colBlur] = blurVal                                   #Fill in the 2D blurred image array using the blurred pixel value and the current location of the pixel in the image
+        blurredImage[rowBlur][colBlur] = blurVal                               #Fill in the 2D blurred image array using the blurred pixel value and the current location of the pixel in the image
         colBlur += 1
-        if colBlur == (numCols - m.floor(kernelCols/2)):                           #Handles when the cursor in the blurred image reaces the end
+        if colBlur == (numCols - m.floor(kernelCols/2)):                       #Handles when the cursor in the blurred image reaces the end
             colBlur = 0
             rowBlur += 1
         print(f"\r{int((currentPixel/numPixels)*100)}% Complete",end='')
@@ -166,8 +168,50 @@ def finalOutput(gaussBlurImage):                                               #
     file = open('gaussBlur.png','wb')                                          #Construct a file named "gaussBlur" in the .png format
     mpl.imsave('gaussBlur.png',gaussBlurImage)                                 #use the matplotlib to write the array to an image file
     file.close()     
-    print("Gaussian Blur Complete. Please see file \"gaussBlur.png\"")        #Close the file
+    print("Gaussian Blur Complete. Please see file \"gaussBlur.png\"")         #Close the file
     return
+
+'''
+===============================================================================
+'''
+
+def GaussianBlur(): 
+
+    inputs = getInputs()                      #Call the inputs function
+    while isinstance(inputs, tuple) != True:       #Workaround for inputs function returning invalid values
+        inputs = getInputs()
+    sigma = float(inputs[0])                       #Separate the tuple of inputs into useful variable names
+    kernelRows = int(inputs[1])
+    kernelCols = int(inputs[1])
+
+    #Start the timer
+    start = time.time()
+
+    #Get the image data
+    grayscaleVals,numRows,numCols,numPixels = getGrayImageData()                        
+
+    #Create an empty array to later store the blurred image in
+    blurredImage = np.zeros((numRows,numCols))                                     
+    
+    #Pad the image with extra 0s for processing and return new number of columns/rows (terrible bugfix but that's okay)
+    grayscaleVals,numCols,numRows = padImage(numRows,numCols,kernelRows,kernelCols,grayscaleVals) 
+
+    #Calculate the Gaussian kernel
+    gaussKernel,sumGauss = calcGaussKernel(sigma,kernelRows,kernelCols)             
+
+    #Create a 2D array of the blurred image data
+    blurredImage = construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel,numPixels)
+
+    #Construct 3D array with the blurred image data
+    gaussBlurImage = createImageArray(blurredImage)                           
+
+    #Write the image to a file
+    finalOutput(gaussBlurImage)     
+
+    #Display the image in the monitor, might be eliminated later?
+    end = time.time()                                   
+    print(f"\nTime elapsed: {round(end - start,2)} seconds.")
+    plt.imshow(gaussBlurImage)
 
 '''
 ===============================================================================
