@@ -42,7 +42,7 @@ def GaussianBlur():
     start = time.time()
 
     #Get the image data
-    grayscaleVals,numRows,numCols = blur.getGrayImageData()                        
+    grayscaleVals,numRows,numCols,numPixels = blur.getGrayImageData()                        
 
     #Create an empty array to later store the blurred image in
     blurredImage = np.zeros((numRows,numCols))                                     
@@ -54,7 +54,7 @@ def GaussianBlur():
     gaussKernel,sumGauss = blur.calcGaussKernel(sigma,kernelRows,kernelCols)             
 
     #Create a 2D array of the blurred image data
-    blurredImage = blur.construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel)
+    blurredImage = blur.construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel,numPixels)
 
     #Construct 3D array with the blurred image data
     gaussBlurImage = blur.createImageArray(blurredImage)                           
@@ -64,10 +64,8 @@ def GaussianBlur():
 
     #Display the image in the monitor, might be eliminated later?
     end = time.time()                                   
-    print(f"Time elapsed: {round(end - start,2)} seconds.")
+    print(f"\nTime elapsed: {round(end - start,2)} seconds.")
     plt.imshow(gaussBlurImage)
-
-GaussianBlur()
 
 '''
 ===============================================================================

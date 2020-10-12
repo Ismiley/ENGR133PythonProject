@@ -64,9 +64,10 @@ def getGrayImageData():                                                        #
     for i in range(0,numRows):                                                 #Loop through the image and convert to 2D array
         for j in range(0,numCols):
             grayscaleVals[i][j] = data[i][j][0]
+    numPixels = numRows * numCols
     #print(f"The dimesions of the image are x: {numCols} and y: {numRows}")
     #print(f"The first row of data is: {grayscaleVals[0]}")                       
-    return grayscaleVals,numRows,numCols
+    return grayscaleVals,numRows,numCols,numPixels
 
 def padImage(numRows,numCols,kernelRows,kernelCols,grayscaleVals):             #Function for giving the image a border to prevent going "out of bounds" with the kernel
     topBottom =  m.floor(kernelRows/2)                                         #Caclulate the width of the border
@@ -78,7 +79,7 @@ def padImage(numRows,numCols,kernelRows,kernelCols,grayscaleVals):             #
     #print(f"Zeros added to left and right: {leftRight}")
     return grayscaleVals,numCols,numRows
 
-def calcGaussKernel(sigma,kernelRows,kernelCols):                                    #Function for creating the Gaussian Blur Kernel
+def calcGaussKernel(sigma,kernelRows,kernelCols):                              #Function for creating the Gaussian Blur Kernel
     gaussKernel = np.zeros((kernelRows,kernelCols))                            #Create an empty array to hold the Gaussian Kernel
     for i in range(0,kernelRows):                                              #Iterate through the empty array and fill it with the normal Gaussian distribution values
         for j in range(0,kernelCols):
@@ -118,8 +119,9 @@ def calcBlur(kernelRows,kernelCols,gaussKernel,kernel):                        #
     #print(f"New Pixel Value: {blurVal}")  
     return blurVal
   
-def construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel):
-    print("Processing image...\nThis may take a while")                            #Begin iterative process 
+def construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel,numPixels):
+    print("Processing image...")                            #Begin iterative process 
+    currentPixel = 0
     currentCol = 0                                                                 #Variable to store where cursor is relative to the window
     currentRow = 0                                                                 
     rowInImage = m.floor(kernelRows/2)                                             #variable to store where the cursor is relative to the image
@@ -144,6 +146,8 @@ def construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscal
         if colBlur == (numCols - m.floor(kernelCols/2)):                           #Handles when the cursor in the blurred image reaces the end
             colBlur = 0
             rowBlur += 1
+        print(f"\r{int((currentPixel/numPixels)*100)}% Complete",end='')
+        currentPixel += 1
         #pauseBuffer = input("Pausing...Press Enter to Continue") 
     return blurredImage
   
