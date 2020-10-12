@@ -36,11 +36,14 @@ def Threshold(image):
                     image[i][j][k] = 1
                 else:
                     image[i][j][k] = 0
+    #Export image
+    mpimg.imsave('Threshold.png', image)
+
     return image
 
 #Apply Threshold function
 image = Threshold(image)
 
-#Export image
-mpimg.imsave('Threshold.png', image)
+##Export image
+##mpimg.imsave('Threshold.png', image)
 
