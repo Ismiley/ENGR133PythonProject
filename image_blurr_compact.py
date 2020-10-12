@@ -27,6 +27,7 @@ Contributors:   Matthew Kane, kane83@purdue.edu
 import image_blurr_functions as blur
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 inputs = blur.getInputs()                      #Call the inputs function
 while isinstance(inputs, tuple) != True:       #Workaround for inputs function returning invalid values
@@ -34,6 +35,9 @@ while isinstance(inputs, tuple) != True:       #Workaround for inputs function r
 sigma = float(inputs[0])                       #Separate the tuple of inputs into useful variable names
 kernelRows = int(inputs[1])
 kernelCols = int(inputs[1])
+
+#Start the timer
+start = time.time()
 
 #Get the image data
 grayscaleVals,numRows,numCols = blur.getGrayImageData()                        
@@ -54,9 +58,11 @@ blurredImage = blur.construct2DArray(blurredImage,kernelRows,kernelCols,numRows,
 gaussBlurImage = blur.createImageArray(blurredImage)                           
 
 #Write the image to a file
-blur.finalOutput(gaussBlurImage)                                        
+blur.finalOutput(gaussBlurImage)     
 
 #Display the image in the monitor, might be eliminated later?
+end = time.time()                                   
+print(f"Time elapsed: {round(end - start,2)} seconds.")
 imgplot = plt.imshow(gaussBlurImage)
 
 '''

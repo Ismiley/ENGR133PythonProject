@@ -42,7 +42,7 @@ def getInputs():                                                               #
         except ValueError:
             print("ERROR: The kernal dimension must be a positive, odd integer greater than 1.")
         else:
-            if n // 2 == 0 or int(n) != n or n <= 0 or n == 1:
+            if n % 2 == 0 or int(n) != n or n <= 0 or n == 1:
                 print("ERROR: The kernel dimension MUST be a positive, odd integer greater than 1.")
                 if sigma <= 0:
                     print("ERROR: The sigma value must be greater than 0.")
