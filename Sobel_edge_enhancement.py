@@ -34,9 +34,9 @@ import numpy as np
 from scipy import signal
 import matplotlib as mpl
    
-def sobel_edge_detection():
+def sobel_edge_detection(image):
     
-    grayImage = mpl.pyplot.imread("Test_image.jpg")  #Reads in grayscale image with gaussian filter
+    grayImage = mpl.pyplot.imread(image)  #Reads in grayscale image with gaussian filter
     filter_x = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])  # Kernel for convulution
     
     new_image_x = signal.convolve2d(grayImage,filter_x) #Image convolved with X filter
@@ -51,8 +51,10 @@ def sobel_edge_detection():
     mpl.pyplot.imshow(gradient_magnitude,cmap = "gray")
     
     file = open("Sobel_edge_enhanced.png","wb") #Opens
-    mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient_magnitude)
+    mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient_magnitude,cmap="gray")
     file.close()
+    
+    return gradient_magnitude
 
 sobel_edge_detection()
 
@@ -65,4 +67,3 @@ ACADEMIC INTEGRITY STATEMENT
     is my own original work.
 ===============================================================================
 '''
-
