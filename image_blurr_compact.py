@@ -29,41 +29,45 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-inputs = blur.getInputs()                      #Call the inputs function
-while isinstance(inputs, tuple) != True:       #Workaround for inputs function returning invalid values
-    inputs = blur.getInputs()
-sigma = float(inputs[0])                       #Separate the tuple of inputs into useful variable names
-kernelRows = int(inputs[1])
-kernelCols = int(inputs[1])
+def GaussianBlur(): 
 
-#Start the timer
-start = time.time()
+    inputs = blur.getInputs()                      #Call the inputs function
+    while isinstance(inputs, tuple) != True:       #Workaround for inputs function returning invalid values
+        inputs = blur.getInputs()
+    sigma = float(inputs[0])                       #Separate the tuple of inputs into useful variable names
+    kernelRows = int(inputs[1])
+    kernelCols = int(inputs[1])
 
-#Get the image data
-grayscaleVals,numRows,numCols = blur.getGrayImageData()                        
+    #Start the timer
+    start = time.time()
 
-#Create an empty array to later store the blurred image in
-blurredImage = np.zeros((numRows,numCols))                                     
+    #Get the image data
+    grayscaleVals,numRows,numCols = blur.getGrayImageData()                        
 
-#Pad the image with extra 0s for processing and return new number of columns/rows (terrible bugfix but that's okay)
-grayscaleVals,numCols,numRows = blur.padImage(numRows,numCols,kernelRows,kernelCols,grayscaleVals) 
+    #Create an empty array to later store the blurred image in
+    blurredImage = np.zeros((numRows,numCols))                                     
+    
+    #Pad the image with extra 0s for processing and return new number of columns/rows (terrible bugfix but that's okay)
+    grayscaleVals,numCols,numRows = blur.padImage(numRows,numCols,kernelRows,kernelCols,grayscaleVals) 
 
-#Calculate the Gaussian kernel
-gaussKernel,sumGauss = blur.calcGaussKernel(sigma,kernelRows,kernelCols)             
+    #Calculate the Gaussian kernel
+    gaussKernel,sumGauss = blur.calcGaussKernel(sigma,kernelRows,kernelCols)             
 
-#Create a 2D array of the blurred image data
-blurredImage = blur.construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel)
+    #Create a 2D array of the blurred image data
+    blurredImage = blur.construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscaleVals,gaussKernel)
 
-#Construct 3D array with the blurred image data
-gaussBlurImage = blur.createImageArray(blurredImage)                           
+    #Construct 3D array with the blurred image data
+    gaussBlurImage = blur.createImageArray(blurredImage)                           
 
-#Write the image to a file
-blur.finalOutput(gaussBlurImage)     
+    #Write the image to a file
+    blur.finalOutput(gaussBlurImage)     
 
-#Display the image in the monitor, might be eliminated later?
-end = time.time()                                   
-print(f"Time elapsed: {round(end - start,2)} seconds.")
-imgplot = plt.imshow(gaussBlurImage)
+    #Display the image in the monitor, might be eliminated later?
+    end = time.time()                                   
+    print(f"Time elapsed: {round(end - start,2)} seconds.")
+    plt.imshow(gaussBlurImage)
+
+GaussianBlur()
 
 '''
 ===============================================================================
