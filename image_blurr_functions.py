@@ -57,8 +57,8 @@ def getInputs():                                                               #
             else:
                 return sigma, n
 
-def getGrayImageData(grayImage):                                                        #Function for importing grayscale image
-    #grayImage = mpl.imread("Grayscale.png")                                    #Get the grayscaled image from the previous filter using matplotlib
+def getGrayImageData(grayImage):                                               #Function for importing grayscale image
+    #grayImage = mpl.imread("Grayscale.png")                                   #Get the grayscaled image from the previous filter using matplotlib
     data = np.array(grayImage)                                                 #Establish a NumPy array with the grayscale image data
     numRows = data.shape[0]                                                    #Store variables with the x and y dimensions of the photo
     numCols = data.shape[1]
@@ -168,6 +168,7 @@ def finalOutput(gaussBlurImage):                                               #
     file = open('gaussBlur.png','wb')                                          #Construct a file named "gaussBlur" in the .png format
     mpl.imsave('gaussBlur.png',gaussBlurImage)                                 #use the matplotlib to write the array to an image file
     file.close()     
+    plt.imshow(gaussBlurImage)
     print("Gaussian Blur Complete. Please see file \"gaussBlur.png\"")         #Close the file
     return
 
@@ -177,10 +178,10 @@ def finalOutput(gaussBlurImage):                                               #
 
 def GaussianBlur(grayImage): 
 
-    inputs = getInputs()                      #Call the inputs function
-    while isinstance(inputs, tuple) != True:       #Workaround for inputs function returning invalid values
+    inputs = getInputs()                                                       #Call the inputs function
+    while isinstance(inputs, tuple) != True:                                   #Workaround for inputs function returning invalid values
         inputs = getInputs()
-    sigma = float(inputs[0])                       #Separate the tuple of inputs into useful variable names
+    sigma = float(inputs[0])                                                   #Separate the tuple of inputs into useful variable names
     kernelRows = int(inputs[1])
     kernelCols = int(inputs[1])
 
@@ -211,9 +212,9 @@ def GaussianBlur(grayImage):
     #Display the image in the monitor
     end = time.time()                                   
     print(f"\nGaussian blur completed in {round(end - start,2)} seconds.")
-    plt.imshow(gaussBlurImage)
     return blurredImage
 
+#GaussianBlur()
 '''
 ===============================================================================
 ACADEMIC INTEGRITY STATEMENT

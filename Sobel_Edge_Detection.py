@@ -48,7 +48,7 @@ print(f"Edge enhancement completed in {round(end-start,2)} seconds.")
 
 #Perform Sobel Edge Detection 
 start = time.time()
-finalImage = detect.Threshold(enhancedImage)
+finalImage = detect.Threshold()
 end = time.time()
 print(f"Final edge detection completed in {round(end-start,2)} seconds.")
 
