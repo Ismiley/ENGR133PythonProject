@@ -164,12 +164,13 @@ def createImageArray(blurredImage):                                            #
                 gaussBlurImage[i][j][k] = blurredImage[i][j]
     return gaussBlurImage
 
-def finalOutput(gaussBlurImage):                                               #Function to write the contents of the 3D array to a file
+def finalOutput(gaussBlurImage):                                               #Function to write the contents of the 3D array to a file   
+    plt.imshow(gaussBlurImage) 
+    plt.show()
     file = open('gaussBlur.png','wb')                                          #Construct a file named "gaussBlur" in the .png format
     mpl.imsave('gaussBlur.png',gaussBlurImage)                                 #use the matplotlib to write the array to an image file
     file.close()     
-    plt.imshow(gaussBlurImage)
-    print("Gaussian Blur Complete. Please see file \"gaussBlur.png\"")         #Close the file
+    print("\nGaussian Blur Complete. Please see file \"gaussBlur.png\"")         #Close the file
     return
 
 '''
@@ -209,7 +210,7 @@ def GaussianBlur(grayImage):
     #Write the image to a file
     finalOutput(gaussBlurImage)     
 
-    #Display the image in the monitor
+    #Return the image for use in the next program
     end = time.time()                                   
     print(f"\nGaussian blur completed in {round(end - start,2)} seconds.")
     return blurredImage

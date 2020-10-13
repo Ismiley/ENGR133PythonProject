@@ -32,10 +32,7 @@ import Threshold as detect
 import time
 
 #Create a grayscale image
-start = time.time()
 grayImage = gray.GrayScale()
-end = time.time()
-print(f"GrayScale Conversion completed in {round(end-start,2)} seconds.")
 
 #Apply a Gaussian Blur
 blurImage = blur.GaussianBlur(grayImage)
@@ -51,7 +48,6 @@ start = time.time()
 finalImage = detect.Threshold()
 end = time.time()
 print(f"Final edge detection completed in {round(end-start,2)} seconds.")
-
 
 '''
 ===============================================================================

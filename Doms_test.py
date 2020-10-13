@@ -24,7 +24,8 @@ Contributors:   Ismail Husain, husain6@purdue
 def GrayScale():
     import matplotlib.image as mpl
     import matplotlib.pyplot as plt
-
+    import time 
+    
     class Error1(FileNotFoundError):
         pass
 
@@ -37,6 +38,8 @@ def GrayScale():
     def importImage(x):         #x is the file path as a string
         global image            #to show image in variable explorer for analysis and later use
         image = mpl.imread(x)
+        plt.imshow(image)
+        plt.show()        
         return image
 
     #Takes the image and and makes it gray by changing the color values of each pixel.
@@ -57,10 +60,14 @@ def GrayScale():
     # Opens an output file, runs applicable functions, then closes
     GOutput=open('Grayscale.png','wb')
     importImage(Input)
+    start = time.time()
     grayPic = RGBtoGRAY(image)
     mpl.imsave('Grayscale.png',RGBtoGRAY(image))
     GOutput.close
+    end = time.time()
+    print(f"GrayScale Conversion completed in {round(end-start,2)} seconds.")
     plt.imshow(grayPic)
+    plt.show()
     return grayPic
 
 #GrayScale()

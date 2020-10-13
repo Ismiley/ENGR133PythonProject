@@ -41,6 +41,7 @@ def Threshold():
     #Export image
     mpimg.imsave('Threshold.png', image)
     plt.imshow(image)
+    plt.show()
 
     return image
 
