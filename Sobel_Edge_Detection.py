@@ -29,18 +29,29 @@ import Doms_test as gray
 import image_blurr_functions as blur
 import Sobel_edge_enhancement as enhance
 import Threshold as detect
+import time
 
-#Function to import the grayscale image
+#Create a grayscale image
+start = time.time()
 grayImage = gray.GrayScale()
+end = time.time()
+print(f"GrayScale Conversion completed in {round(end-start,2)} seconds.")
 
-#Function to perform blur/smoothing
+#Apply a Gaussian Blur
 blurImage = blur.GaussianBlur(grayImage)
 
-#Function to perform edge enhancement
+#Perform Edge Enhancement
+start = time.time()
 enhancedImage = enhance.sobel_edge_detection(blurImage)
+end = time.time()
+print(f"Edge enhancement completed in {round(end-start,2)} seconds.")
 
-#Function to perform Sobel edge detection 
+#Perform Sobel Edge Detection 
+start = time.time()
 finalImage = detect.Threshold(enhancedImage)
+end = time.time()
+print(f"Final edge detection completed in {round(end-start,2)} seconds.")
+
 
 '''
 ===============================================================================

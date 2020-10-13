@@ -50,7 +50,6 @@ def sobel_edge_detection(image):
     gradient_magnitude *= 255/gradient_magnitude.max() #Normalizes to values between 0 to 255
     
     mpl.pyplot.imshow(gradient_magnitude,cmap = "gray")
-    print("Edge Enhancement Complete.")
     
     file = open("Sobel_edge_enhanced.png","wb") #Opens
     mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient_magnitude,cmap="gray")

@@ -23,6 +23,7 @@ Contributors:   Ismail Husain, husain6@purdue
 '''
 def GrayScale():
     import matplotlib.image as mpl
+    import matplotlib.pyplot as plt
 
     class Error1(FileNotFoundError):
         pass
@@ -33,14 +34,14 @@ def GrayScale():
         raise Error1('File name incorrect, dont forget the file type')
 
     # Takes a file path and returns the array of the image
-    def importImage(x): #x is the file path as a string
-        global image # to show image in variable explorer for analysis and later use
+    def importImage(x):         #x is the file path as a string
+        global image            #to show image in variable explorer for analysis and later use
         image = mpl.imread(x)
         return image
 
-    #Takes he image and and makes it gray by changing the color values of each pixel.
+    #Takes the image and and makes it gray by changing the color values of each pixel.
     def RGBtoGRAY(rgb):
-        global gray # to show image in cariable explorer for analysis
+        global gray             #to show image in cariable explorer for analysis
         for i in range(len(rgb)):
             for j in range(len(rgb[0])):
                 # Gets the RGB values for a pixel
@@ -59,6 +60,7 @@ def GrayScale():
     grayPic = RGBtoGRAY(image)
     mpl.imsave('Grayscale.png',RGBtoGRAY(image))
     GOutput.close
+    plt.imshow(grayPic)
     return grayPic
 
 #GrayScale()

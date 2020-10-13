@@ -208,9 +208,9 @@ def GaussianBlur(grayImage):
     #Write the image to a file
     finalOutput(gaussBlurImage)     
 
-    #Display the image in the monitor, might be eliminated later?
+    #Display the image in the monitor
     end = time.time()                                   
-    print(f"\nTime elapsed: {round(end - start,2)} seconds.")
+    print(f"\nGaussian blur completed in {round(end - start,2)} seconds.")
     plt.imshow(gaussBlurImage)
     return blurredImage
 
