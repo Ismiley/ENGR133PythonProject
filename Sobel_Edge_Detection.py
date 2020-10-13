@@ -25,14 +25,22 @@ Contributors:   Matthew Kane, kane83@purdue.edu
 ===============================================================================
 '''
 #The final edge detection program using the Sobel Algorithm 
+import Doms_test as gray
+import image_blurr_functions as blur
+import Sobel_edge_enhancement as enhance
+import Threshold as detect
 
 #Function to import the grayscale image
+grayImage = gray.GrayScale()
 
 #Function to perform blur/smoothing
+blurImage = blur.GaussianBlur(grayImage)
 
 #Function to perform edge enhancement
+enhancedImage = enhance.sobel_edge_detection(blurImage)
 
 #Function to perform Sobel edge detection 
+finalImage = detect.Threshold(enhancedImage)
 
 '''
 ===============================================================================

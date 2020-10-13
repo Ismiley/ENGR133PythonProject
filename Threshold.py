@@ -10,7 +10,7 @@ Created on Tue Oct  6 15:03:52 2020
 import matplotlib.image as mpimg
 
 #get image location
-path = input('Input image file name (in folder): ')
+#path = input('Input image file name (in folder): ')
 
 ##Function to import image
 def importImage(path):
@@ -18,7 +18,7 @@ def importImage(path):
     return image
 
 #import image
-image = importImage(path)
+#image = importImage(path)
 
 
 ##Threshold function
@@ -42,7 +42,7 @@ def Threshold(image):
     return image
 
 #Apply Threshold function
-image = Threshold(image)
+#image = Threshold(image)
 
 ##Export image
 ##mpimg.imsave('Threshold.png', image)

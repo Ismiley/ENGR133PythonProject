@@ -57,8 +57,8 @@ def getInputs():                                                               #
             else:
                 return sigma, n
 
-def getGrayImageData():                                                        #Function for importing grayscale image
-    grayImage = mpl.imread("Grayscale.png")                                    #Get the grayscaled image from the previous filter using matplotlib
+def getGrayImageData(grayImage):                                                        #Function for importing grayscale image
+    #grayImage = mpl.imread("Grayscale.png")                                    #Get the grayscaled image from the previous filter using matplotlib
     data = np.array(grayImage)                                                 #Establish a NumPy array with the grayscale image data
     numRows = data.shape[0]                                                    #Store variables with the x and y dimensions of the photo
     numCols = data.shape[1]
@@ -175,7 +175,7 @@ def finalOutput(gaussBlurImage):                                               #
 ===============================================================================
 '''
 
-def GaussianBlur(): 
+def GaussianBlur(grayImage): 
 
     inputs = getInputs()                      #Call the inputs function
     while isinstance(inputs, tuple) != True:       #Workaround for inputs function returning invalid values
@@ -188,7 +188,7 @@ def GaussianBlur():
     start = time.time()
 
     #Get the image data
-    grayscaleVals,numRows,numCols,numPixels = getGrayImageData()                        
+    grayscaleVals,numRows,numCols,numPixels = getGrayImageData(grayImage)                        
 
     #Create an empty array to later store the blurred image in
     blurredImage = np.zeros((numRows,numCols))                                     
@@ -212,6 +212,7 @@ def GaussianBlur():
     end = time.time()                                   
     print(f"\nTime elapsed: {round(end - start,2)} seconds.")
     plt.imshow(gaussBlurImage)
+    return blurredImage
 
 '''
 ===============================================================================

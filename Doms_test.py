@@ -56,12 +56,12 @@ def GrayScale():
     # Opens an output file, runs applicable functions, then closes
     GOutput=open('Grayscale.png','wb')
     importImage(Input)
-    RGBtoGRAY(image)
+    grayPic = RGBtoGRAY(image)
     mpl.imsave('Grayscale.png',RGBtoGRAY(image))
     GOutput.close
-    return image
+    return grayPic
 
-GrayScale()
+#GrayScale()
 
 '''
 ===============================================================================
