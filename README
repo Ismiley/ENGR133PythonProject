@@ -14,6 +14,7 @@ Enter a value for the variance and dimensions for a Gaussian distribution kernel
 
 Included in newest version:
 1.2
+-Added image step outputs for each subtask
 -fixed crashing grayscale program
 KNOWN ISSUES:
 -third step uses sciPy library
