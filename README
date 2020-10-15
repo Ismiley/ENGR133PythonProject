@@ -1,13 +1,39 @@
-To get files from repository **FIRST TIME:
-git clone (enter repository link)
+*****Bugfix_1.2*****
+Python-Based Sobel Edge Detection
 
-To upload files from local repository:
-cd (project location on local device)
-git add (filename to be added back to online repository)
-git commit -m "(message for revision)"
-git push
+Contributors:
+Matthew Kane, kane83@purdue.edu
+Dominic Caponigro, dcoponig@purdue.edu
+Avneesh Viswanath, viswan16@purdue.edu
+Ismail Husain, husain6@purdue.edu
 
+Instructions:
+Run "Sobel_Edge_Detection.py"
+Enter a filename of a colored .png image
+Enter a value for the variance and dimensions for a Gaussian distribution kernel
 
-To get update files from online repository
-cd (local project address)
-git pull
+Included in newest version:
+1.2
+-fixed crashing grayscale program
+KNOWN ISSUES:
+-third step uses sciPy library
+-fourth step expects 3d matrix, third step returns 2d
+-threshold program takes no user input
+
+Previous Versions
+1.1
+-Added timer functionality and verbose output
+-patched error between steps 3 and 4
+KNOWN ISSUES:
+-third step uses SciPy library
+-Invalid Input crashes grayscale program
+-fourth step expects 3d matrix, third step returns 2d
+-threshold program takes no user input
+
+1.0
+-initial upload of program
+KNOWN ISSUES:
+-error passing data between third and fourth steps
+-third step uses SciPy library
+-Invalid input crashes grayscale program
+-Threshold program takes no user input
