@@ -9,7 +9,7 @@ Assignment Information
 	Team ID:        LC5-005
 	
 Contributors:   Matthew Kane, kane83@purdue.edu
-                Dominic Caponigo, dcoponig@purdue.edu
+                Dominic Caponigro, dcoponig@purdue.edu
                 Avneesh Viswanath, viswan16@purdue.edu
                 Ismail Husain, husain6@purdue.edu
 

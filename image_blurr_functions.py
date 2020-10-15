@@ -9,7 +9,7 @@ Assignment Information
 	Team ID:        LC5-005
 	
 Contributors:   Matthew Kane, kane83@purdue.edu
-                Dominic Caponigo, dcoponig@purdue.edu
+                Dominic Caponigro, dcoponig@purdue.edu
                 Avneesh Viswanath, viswan16@purdue.edu
                 Ismail Husain, husain6@purdue.edu
 
@@ -170,7 +170,7 @@ def finalOutput(gaussBlurImage):                                               #
     file = open('gaussBlur.png','wb')                                          #Construct a file named "gaussBlur" in the .png format
     mpl.imsave('gaussBlur.png',gaussBlurImage)                                 #use the matplotlib to write the array to an image file
     file.close()     
-    print("\nGaussian Blur Complete. Please see file \"gaussBlur.png\"")         #Close the file
+    print("\nGaussian Blur Complete. Please see file \"gaussBlur.png\"")       #Close the file
     return
 
 '''
