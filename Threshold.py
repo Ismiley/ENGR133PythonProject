@@ -12,21 +12,23 @@ import matplotlib.pyplot as plt
 
 #get image location
 #path = input('Input image file name (in folder): ')
-
 ##Function to import image
 def importImage(path):
     image = mpimg.imread(path)
     return image
 
-#import image
-#image = importImage(path)
 
 
 ##Threshold function
 #Takes each RGB value, converts to 8 bit number,
-#converts to black (0) or white (255) if threshold value 160 is met
+#converts to black (0) or white (255) if threshold value is met
 def Threshold():
     image = mpimg.imread("Sobel_edge_enhanced.png")
+    thresholdVal = -1
+    while thresholdVal > 255 or thresholdVal < 0:
+        thresholdVal = int(input("Enter the desired threshold value [Recommended=25]: "))
+        if thresholdVal > 255 or thresholdVal < 0:
+            print("Please enter a valid threshold value!")
     iRows = len(image)
     iCols = len(image[0])
     iVals = len(image[0][0])
@@ -34,7 +36,7 @@ def Threshold():
         for j in range(iCols):
             for k in range(iVals):   
                 valRGB = 255 * image[i][j][k]
-                if valRGB > 25:
+                if valRGB > thresholdVal:
                     image[i][j][k] = 1
                 else:
                     image[i][j][k] = 0
@@ -45,9 +47,5 @@ def Threshold():
 
     return image
 
-#Apply Threshold function
-#image = Threshold(image)
 
-##Export image
-##mpimg.imsave('Threshold.png', image)
 
