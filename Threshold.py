@@ -95,6 +95,7 @@ def Threshold():
             thresholdVal = getThresholdVal()
             while isinstance(thresholdVal,float)!=True:
                 thresholdVal = getThresholdVal()
+        image = mpimg.imread("Sobel_edge_enhanced.png")
         getThresholdImage(image,thresholdVal)
         cont = getContinueVal()
         while isinstance(cont, int) != True:
