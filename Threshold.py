@@ -18,6 +18,43 @@ def importImage(path):
     image = mpimg.imread(path)
     return image
 
+#Input a threshold value
+def getThresholdVal():
+    global thresholdVal
+    try:
+        thresholdVal = float(input("Enter the desired threshold value: "))
+    except ValueError:
+        print("Error: Not a valid value.")
+        return
+    return thresholdVal
+
+#Input a value to continue or exit program
+def getContinueVal():
+    global continueVal
+    try:
+        continueVal = int(input("If you do not like the image, press '1'. If not, click '0'. "))
+    except ValueError:
+        print("Error: Not a 1 or 0")
+        return
+    return continueVal
+
+#Threshold and output image
+def getThresholdImage(image,thresholdVal):
+    iRows = len(image)
+    iCols = len(image[0])
+    iVals = len(image[0][0])
+    for i in range(iRows):
+        for j in range(iCols):
+            for k in range(iVals):
+                valRGB = 255 * image[i][j][k]
+                if valRGB > thresholdVal:
+                    image[i][j][k] = 1
+                else:
+                    image[i][j][k] = 0
+    # Export image
+    mpimg.imsave('Threshold.png', image)
+    plt.imshow(image)
+    plt.show()
 
 
 ##Threshold function
@@ -31,46 +68,36 @@ def Threshold():
     # Get histogram
     hist, bin_edges = np.histogram(image, bins=256)
 
-    # Calc center of bins
-    bin_mids = (bin_edges[:-1] + bin_edges[1:]) / 2.
+    #Calculate midpoints of each bin
+    bin_midpoints = .5 * (bin_edges[1:] + bin_edges[:-1])
 
-    # Get probabilities for thresholds
-    weight_1 = np.cumsum(hist)
-    weight_2 = np.cumsum(hist[::-1])[::-1]
+    #Calculate average of histogram datapoints
+    histMean = np.average(bin_midpoints, weights=hist)
 
-    # Get means of probabilities
-    mean_1 = np.cumsum(hist * bin_mids) / weight_1
-    mean_2 = (np.cumsum((hist * bin_mids)[::-1]) / weight_2[::-1])[::-1]
-    iCV = weight_1[:-1] * weight_2[1:] * (mean_1[:-1] - mean_2[1:]) ** 2
-
-    # Maximize the inter class variance
-    index_of_max_val = np.argmax(iCV)
-    thresholdVal2 = bin_mids[:-1][index_of_max_val]
+    #Set average of pixel data as threshold
+    thresholdVal2 = histMean
 
     # Convert threshold to 8-bit value
     thresholdVal2 = thresholdVal2 * 255
 
-    thresholdVal = -1
-    while thresholdVal > 255 or thresholdVal < 0:
-        print(f"The recommended threshold value is {thresholdVal2}")
-        thresholdVal = int(input("Enter the desired threshold value: "))
-        if thresholdVal > 255 or thresholdVal < 0:
-            print("Please enter a valid threshold value! [0-255]")
+    print(f"The recommended threshold value is {thresholdVal2}.")
+    print("Here is the image printed from that threshold value.")
+    getThresholdImage(image, thresholdVal2)
+    cont = getContinueVal()
 
-    iRows = len(image)
-    iCols = len(image[0])
-    iVals = len(image[0][0])
-    for i in range(iRows):
-        for j in range(iCols):
-            for k in range(iVals):
-                valRGB = 255 * image[i][j][k]
-                if valRGB > thresholdVal:
-                    image[i][j][k] = 1
-                else:
-                    image[i][j][k] = 0
-    #Export image
-    mpimg.imsave('Threshold.png', image)
-    plt.imshow(image)
-    plt.show()
+    while isinstance(cont,int)!=True:
+        cont = getContinueVal()
+
+    while cont == 1:
+        thresholdVal = -1
+        while thresholdVal > 255 or thresholdVal < 0:
+            print(f"The recommended threshold value is {thresholdVal2}")
+            thresholdVal = getThresholdVal()
+            while isinstance(thresholdVal,float)!=True:
+                thresholdVal = getThresholdVal()
+        getThresholdImage(image,thresholdVal)
+        cont = getContinueVal()
+        while isinstance(cont, int) != True:
+            cont = getContinueVal()
 
     return image
