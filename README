@@ -1,4 +1,4 @@
-*****Bugfix_1.3*****
+*****Bugfix_1.4*****
 Python-Based Sobel Edge Detection
 
 Contributors:
@@ -13,13 +13,21 @@ Enter a filename of a colored .png image
 Enter a value for the variance and dimensions for a Gaussian distribution kernel
 
 Included in newest version:
+1.4
+-threshold value is now dinamically calculated
+-user has the option to enter a new threshold value manually if not satisfied
+-error handling in threshold program
+KNOWN ISSUES:
+-program is very slow in general
+-time elapsed in thresholding does not reflect processing time
+
+Previous Versions
 1.3
 -removed the sciPy library from third step
 -patched the communication discrepency between step 3 and 4
 KNOWN ISSUES:
 -threshold program uses static threshold value
 
-Previous Versions
 1.2
 -Added image step outputs for each subtask
 -fixed crashing grayscale program
