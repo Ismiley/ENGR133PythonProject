@@ -9,7 +9,7 @@ Assignment Information
 	Team ID:        LC5-005
 	
 Contributors:   Matthew Kane, kane83@purdue.edu
-                Dominic Caponigro, dcoponig@purdue.edu
+                Dominick Caponigro, dcoponig@purdue.edu
                 Avneesh Viswanath, viswan16@purdue.edu
                 Ismail Husain, husain6@purdue.edu
 
@@ -24,6 +24,7 @@ Contributors:   Matthew Kane, kane83@purdue.edu
 	have to list that person as a contributor here as well.
 ===============================================================================
 '''
+#Bugfix_1.4
 #The following code is the program that performs the edge blurring on the converted grayscale image.
 #All commented print statements are for debug purposes only
 
@@ -42,7 +43,7 @@ def getInputs():                                                               #
         try:
             n = float(input("Enter the size for the kernel dimensions: "))     #Error handling for incorrect entries for kernel dimensions
         except ValueError:
-            print("ERROR: The kernal dimension must be a positive, odd integer greater than 1.")
+            print("ERROR: The kernel dimension must be a positive, odd integer greater than 1.")
         else:
             if n % 2 == 0 or int(n) != n or n <= 0 or n == 1:
                 print("ERROR: The kernel dimension MUST be a positive, odd integer greater than 1.")

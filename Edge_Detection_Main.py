@@ -9,7 +9,7 @@ Assignment Information
 	Team ID:        LC5-005
 	
 Contributors:   Matthew Kane, kane83@purdue.edu
-                Dominic Caponigro, dcoponig@purdue.edu
+                Dominick Caponigro, dcoponig@purdue.edu
                 Avneesh Viswanath, viswan16@purdue.edu
                 Ismail Husain, husain6@purdue.edu
 
@@ -24,7 +24,8 @@ Contributors:   Matthew Kane, kane83@purdue.edu
 	have to list that person as a contributor here as well.
 ===============================================================================
 '''
-#The final edge detection program using the Sobel Algorithm 
+#Bugfix_1.4
+#Edge detection program using the Sobel Algorithm 
 import Doms_test as gray
 import image_blurr_functions as blur
 import Sobel_edge_enhancement as enhance
@@ -34,7 +35,7 @@ import time
 #Create a grayscale image
 grayImage = gray.GrayScale()
 
-#Apply a Gaussian Blur
+#Apply a Gaussian Blur filter
 blurImage = blur.GaussianBlur(grayImage)
 
 #Perform Edge Enhancement

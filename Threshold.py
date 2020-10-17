@@ -1,11 +1,34 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Oct  6 15:03:52 2020
-
 @author: Ismail Husain
 """
+'''
+===============================================================================
+ENGR 133 Fa 2020
 
-### Thresholding
+Assignment Information
+	Assignment:     Python Team Project: Image Analysis
+	Author:         Matthew Kane, kane83@purdue.edu
+	Team ID:        LC5-005
+	
+Contributors:   Matthew Kane, kane83@purdue.edu
+                Dominick Caponigro, dcoponig@purdue.edu
+                Avneesh Viswanath, viswan16@purdue.edu
+                Ismail Husain, husain6@purdue.edu
+
+	My contributor(s) helped me:	
+	[ ] understand the assignment expectations without
+		telling me how they will approach it.
+	[ ] understand different ways to think about a solution
+		without helping me plan my solution.
+	[ ] think through the meaning of a specific error or
+		bug present in my code without looking at my code.
+	Note that if you helped somebody else with their code, you
+	have to list that person as a contributor here as well.
+===============================================================================
+'''
+#Bugfix_1.4
 
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt

@@ -1,15 +1,18 @@
+
 '''
 ===============================================================================
 ENGR 133 Fa 2020
 
 Assignment Information
-	Assignment:     e.g. Py1 Task 1
-	Author:         Name, dcaponig@purdue.edu
-	Team ID:        LC5-05 
+	Assignment:     Python Team Project: Image Analysis
+	Author:         Matthew Kane, kane83@purdue.edu
+	Team ID:        LC5-005
 	
-Contributors:   Ismail Husain, husain6@purdue 
-                Matthew Kane, kane83@purdue 
-                Name, login@purdue 
+Contributors:   Matthew Kane, kane83@purdue.edu
+                Dominick Caponigro, dcoponig@purdue.edu
+                Avneesh Viswanath, viswan16@purdue.edu
+                Ismail Husain, husain6@purdue.edu
+
 	My contributor(s) helped me:	
 	[ ] understand the assignment expectations without
 		telling me how they will approach it.
@@ -21,6 +24,7 @@ Contributors:   Ismail Husain, husain6@purdue
 	have to list that person as a contributor here as well.
 ===============================================================================
 '''
+#Bugfix_1.4
 def GrayScale():
     import matplotlib.image as mpl
     import matplotlib.pyplot as plt
