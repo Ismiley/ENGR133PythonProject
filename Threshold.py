@@ -50,7 +50,7 @@ def Threshold():
     # Convert threshold to 8-bit value
     thresholdVal2 = thresholdVal2 * 255
 
-    while thresholdVal > 255 or thresholdVal < 0:
+    while thresholdVal2 > 255 or thresholdVal2 < 0:
         print(f"The recommended threshold value is {thresholdVal2}")
         thresholdVal2 = int(input("Enter the desired threshold value: "))
         if thresholdVal2 > 255 or thresholdVal2 < 0:
@@ -73,4 +73,3 @@ def Threshold():
     plt.show()
 
     return image
-
