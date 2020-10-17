@@ -23,8 +23,8 @@ def importImage(path):
 ##Threshold function
 #Takes each RGB value, converts to 8 bit number,
 #converts to black (0) or white (255) if threshold value is met
-def Threshold(image):
-    #image = mpimg.imread("Sobel_edge_enhanced.png")
+def Threshold():
+    image = mpimg.imread("Sobel_edge_enhanced.png")
     #image = mpimg.imread("Grayscale.png")
     #thresholdVal = -1
 
@@ -50,10 +50,11 @@ def Threshold(image):
     # Convert threshold to 8-bit value
     thresholdVal2 = thresholdVal2 * 255
 
-    #while thresholdVal > 255 or thresholdVal < 0:
-    #    thresholdVal = int(input("Enter the desired threshold value [Recommended=25]: "))
-    #    if thresholdVal > 255 or thresholdVal < 0:
-    #        print("Please enter a valid threshold value!")
+    while thresholdVal > 255 or thresholdVal < 0:
+        print(f"The recommended threshold value is {thresholdVal2}")
+        thresholdVal2 = int(input("Enter the desired threshold value: "))
+        if thresholdVal2 > 255 or thresholdVal2 < 0:
+            print("Please enter a valid threshold value! [0-255]")
 
     iRows = len(image)
     iCols = len(image[0])
