@@ -30,12 +30,12 @@ Contributors:    DJ Caponigro, ldcaponig@purdue.edu
 	have to list that person as a contributor here as well.
 ===============================================================================
 '''
-
 import numpy as np
 import matplotlib as mpl
-import math as m
    
 def sobel_edge_detection(image):
+    
+    print("Performing sobel edge detection...")
     
     grayImage = mpl.pyplot.imread(image)  #Reads in grayscale image with gaussian filter
     filter_x = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])  # Kernel for convulution
@@ -49,35 +49,39 @@ def sobel_edge_detection(image):
     gradient = np.sqrt(np.square(new_image_x) + np.square(new_image_y)) #Calculates magnitude of gradient
     gradient *= 255/gradient.max() #Normalizes to values between 0 to 255
     
-    mpl.pyplot.imshow(gradient,cmap = "gray")
+    mpl.pyplot.imshow(gradient,cmap = "gray") #Plots sobel edge enhanced image
     
-    file = open("Sobel_edge_enhanced.png","wb") #Opens
-    mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient,cmap="gray")
+    file = open("Sobel_edge_enhanced.png","wb") #Opens image file
+    mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient,cmap="gray") #Save Sobel edge enhanced image plot
     file.close()
     
-    return gradient
+    print("Process completed")
+    
+    return gradient, createImageArray(gradient)
+
+def createImageArray(Image): #Function to create a 3D array of the gradient magnitude for thresholding in the next step
+    numRows = Image.shape[0] #Re-establish the number of rows because the padding is no longer necessary
+    numCols = Image.shape[1]
+    image_3d_arr = np.zeros((numRows,numCols,3)) #Create an empty array that will hold the image data
+    for i in range(0,numRows): #Iterate over the empty array and populate it with the new pixel value derived from the sum of the product of the Gauss Kernel and working window
+        for j in range(0,numCols):
+            for k in range(0,3):
+                image_3d_arr[i][j][k] = Image[i][j]
+                
+    return Image
+
 
 def convolve(image, kernel):
     
- 
     image_row, image_col = image.shape
     kernel_row, kernel_col = kernel.shape
  
     output = np.zeros(image.shape)
- 
-    pad_height = m.floor((kernel_row - 1) / 2)
-    pad_width = m.floor((kernel_col - 1) / 2)
- 
-    padded_image = np.zeros((image_row + (2 * pad_height), image_col + (2 * pad_width)))
- 
-    padded_image[pad_height:padded_image.shape[0] - pad_height, pad_width:padded_image.shape[1] - pad_width] = image
- 
- 
-    for row in range(1,image_row):
-        for col in range(1,image_col):
-            output[row, col] = np.sum(kernel * padded_image[row:row + kernel_row, col:col + kernel_col])
+    
+    for i in range(1,image_row-2):
+        for j in range(1,image_col-2):
+            output[i, j] = np.sum(kernel * image[i:i + kernel_row, j:j + kernel_col]) #Performs convolution operation,
            
- 
     return output
  
 '''
