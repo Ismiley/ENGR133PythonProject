@@ -50,10 +50,11 @@ def Threshold():
     # Convert threshold to 8-bit value
     thresholdVal2 = thresholdVal2 * 255
 
-    while thresholdVal2 > 255 or thresholdVal2 < 0:
+    thresholdVal = -1
+    while thresholdVal > 255 or thresholdVal < 0:
         print(f"The recommended threshold value is {thresholdVal2}")
-        thresholdVal2 = int(input("Enter the desired threshold value: "))
-        if thresholdVal2 > 255 or thresholdVal2 < 0:
+        thresholdVal = int(input("Enter the desired threshold value: "))
+        if thresholdVal > 255 or thresholdVal < 0:
             print("Please enter a valid threshold value! [0-255]")
 
     iRows = len(image)
@@ -63,7 +64,7 @@ def Threshold():
         for j in range(iCols):
             for k in range(iVals):
                 valRGB = 255 * image[i][j][k]
-                if valRGB > thresholdVal2:
+                if valRGB > thresholdVal:
                     image[i][j][k] = 1
                 else:
                     image[i][j][k] = 0
