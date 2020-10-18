@@ -28,52 +28,43 @@ Contributors:    DJ Caponigro, ldcaponig@purdue.edu
 #Bugfix_1.4
 import numpy as np
 import matplotlib as mpl
-import math as m
+
    
 def sobel_edge_detection(image):
     
-    #grayImage = mpl.pyplot.imread(image)  #Reads in grayscale image with gaussian filter
-    grayImage = image
+    print("Performing sobel edge detection...")
+    
+    grayImage = mpl.pyplot.imread(image)  #Reads in grayscale image with gaussian filter
     filter_x = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])  # Kernel for convulution
     
     new_image_x = convolve(grayImage,filter_x) #Image convolved with X filter
     new_image_y = convolve(grayImage,np.flip(filter_x.T,axis=0)) #Image convolved with y filter
     
     mpl.pyplot.imshow(new_image_x,cmap = "gray")
-    mpl.pyplot.show()
     mpl.pyplot.imshow(new_image_y,cmap = "gray")
-    mpl.pyplot.show()
    
     gradient = np.sqrt(np.square(new_image_x) + np.square(new_image_y)) #Calculates magnitude of gradient
     gradient *= 255/gradient.max() #Normalizes to values between 0 to 255
     
-    mpl.pyplot.imshow(gradient,cmap = "gray")
+    mpl.pyplot.imshow(gradient,cmap = "gray") #Plots sobel edge enhanced image
     
-    file = open("Sobel_edge_enhanced.png","wb") #Opens
-    mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient,cmap="gray")
+    file = open("Sobel_edge_enhanced.png","wb") #Opens image file
+    mpl.pyplot.imsave("Sobel_edge_enhanced.png",gradient,cmap="gray") #Save Sobel edge enhanced image
     file.close()
+    
+    print("Process completed")
     
     return gradient
 
 def convolve(image, kernel):
     
- 
     image_row, image_col = image.shape
     kernel_row, kernel_col = kernel.shape
  
     output = np.zeros(image.shape)
- 
-    pad_height = m.floor((kernel_row - 1) / 2)
-    pad_width = m.floor((kernel_col - 1) / 2)
- 
-    padded_image = np.zeros((image_row + (2 * pad_height), image_col + (2 * pad_width)))
- 
-    padded_image[pad_height:padded_image.shape[0] - pad_height, pad_width:padded_image.shape[1] - pad_width] = image
- 
- 
-    for row in range(1,image_row):
-        for col in range(1,image_col):
-            output[row, col] = np.sum(kernel * padded_image[row:row + kernel_row, col:col + kernel_col])
+    
+    for i in range(1,image_row-2):
+        for j in range(1,image_col-2):
+            output[i, j] = np.sum(kernel * image[i:i + kernel_row, j:j + kernel_col]) #Performs convolution operation
            
- 
     return output
