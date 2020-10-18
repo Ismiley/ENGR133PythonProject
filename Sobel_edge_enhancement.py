@@ -34,7 +34,8 @@ def sobel_edge_detection(image):
     
     print("Performing sobel edge detection...")
     
-    grayImage = mpl.pyplot.imread(image)  #Reads in grayscale image with gaussian filter
+    #grayImage = mpl.pyplot.imread(image)  #Reads in grayscale image with gaussian filter
+    grayImage = image
     filter_x = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])  # Kernel for convulution
     
     new_image_x = convolve(grayImage,filter_x) #Image convolved with X filter
