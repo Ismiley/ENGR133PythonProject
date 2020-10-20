@@ -131,6 +131,7 @@ def construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscal
     colInImage = m.floor(kernelCols/2)                                             
     rowBlur = 0                                                                #Variable to store the cursor relative to the blurred image
     colBlur = 0                                                                    
+    currentPercent = 0
     while rowInImage < numRows and colInImage < numCols:                       #Iterate through the rows and columns of the image, making each pixel the center pixel of the working window
         kernel = calcWindow(kernelRows,kernelCols,grayscaleVals,currentCol,currentRow,colInImage)
         if colInImage == (numCols-1):                                          #Handle the case when the counter reaches the end of a row
@@ -149,7 +150,10 @@ def construct2DArray(blurredImage,kernelRows,kernelCols,numRows,numCols,grayscal
         if colBlur == (numCols - m.floor(kernelCols/2)):                       #Handles when the cursor in the blurred image reaces the end
             colBlur = 0
             rowBlur += 1
-        print(f"\r{int((currentPixel/numPixels)*100)}% Complete",end='')
+        pastPercent = currentPercent
+        currentPercent = int((currentPixel/numPixels)*100)
+        if currentPercent != pastPercent:
+            print(f"\r{int((currentPixel/numPixels)*100)}% Complete",end='')
         currentPixel += 1
         #pauseBuffer = input("Pausing...Press Enter to Continue") 
     return blurredImage
